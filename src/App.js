@@ -1,25 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Parents from './parents';
+import colorContext from './colorContext';
 
 function App() {
+  let colorState = useState('White')
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <colorContext.Provider value={colorState}>
+      <div className={`box ${colorState[0] === 'Red' ? 'red' : colorState[0] ==='Green' ? 'green' : colorState[0] ==='Blue' ? 'blue' : 'white'}`}>
+        <Parents/>
+      </div>
+    </colorContext.Provider>
   );
 }
 
