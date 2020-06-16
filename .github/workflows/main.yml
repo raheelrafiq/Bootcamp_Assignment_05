@@ -1,4 +1,3 @@
-
  
 # This is a basic workflow to help you get started with Actions
 
@@ -21,22 +20,18 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-      
-    - name: Installing Nodejs
-      uses: actions/setup-node@v2-beta 
-      with:
-        node-version: 12 
 
-    - name : installing yarn
-      uses : Borales/actions-yarn@v2.1.0
+    - name: setup node enviroment
+      uses: actions/setup-node@v2-beta
       with:
-          cmd : install
-
-    - name : creacting build
+        version: 12
+    - name: Action for yarn
+      uses: Borales/actions-yarn@v2.1.0
+      with:
+        cmd: install
+    - name: creating build
       run: yarn build
-      
     - name: installing surge
-      run: npm install --global surge
-      
-    - name : deploying surge
+      run: npm install -g surge
+    - name: deploying
       run: surge ./build http://bootcamp2020_assignment_05.surge.sh --token ${{secrets.NEW_SECRET}}
